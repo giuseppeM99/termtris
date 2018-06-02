@@ -45,7 +45,7 @@ higher-level installer like `brew` or `apt-get`, you might be able to use that
 to get `lua` and `luarocks`.
 From there:
 
-* `sudo luarocks install luaposix`
+* `sudo luarocks install luaposix lcurses`
 * `git clone https://github.com/tylerneylon/termtris.git`
 * `lua termtris/termtris.lua`
 
@@ -580,8 +580,9 @@ point it's locked in palce.
 
       -- Handle the down arrow.
       if key == curses.KEY_DOWN then
-        while set_moving_piece_if_valid({y = moving_piece.y + 1}) do end
-        lock_and_update_moving_piece(stats, fall, next_piece)
+          if not set_moving_piece_if_valid({y = moving_piece.y + 1}) then
+              lock_and_update_moving_piece(stats, fall, next_piece)
+          end
       end
     end
 

@@ -292,8 +292,9 @@ local function handle_input(stats, fall, next_piece)
 
   -- Handle the down arrow.
   if key == curses.KEY_DOWN then
-    while set_moving_piece_if_valid({y = moving_piece.y + 1}) do end
-    lock_and_update_moving_piece(stats, fall, next_piece)
+    if not set_moving_piece_if_valid({y = moving_piece.y + 1}) then
+        lock_and_update_moving_piece(stats, fall, next_piece)
+    end
   end
 end
 
